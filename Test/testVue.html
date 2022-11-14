@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test-technique</title>
+
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+</head>
+<body>
+    <div id="app">
+        <div class="left-side">
+            <h1>
+                Bonjour <br/>
+                {{selected.toUpperCase()}}
+            </h1>
+            <p>Sélectionner un nouveau profil à l'aide de cette liste : 
+                <select v-model="selected">
+                    <option v-for="name in profiles" :key="name.first">
+                        {{ name.first}} {{ name.last }}
+                    </option>
+                </select>
+            </p>
+            <button v-model="selected" @click="profilePic">Afficher sa photo de profil</button>
+        </div>
+        <div class="right-side">
+            <img class="front-arrow" src="./test-font-vue/assets/front-arrow.svg">
+            <img class="photo" src="./test-font-vue/assets/hero-image.jpg">
+        </div>
+    </div>
+    
+    
+</body>
+
+<script>
+
+    //**normal XMLHttpRequest **//      <====== Requête de l'API trouvée lors de mes recherches
+        // function(){
+            // var endpoint = "https://randomuser.me/api/?results="
+
+            // var app = new Vue ({
+                // el: '#app',
+                // data: {
+                    // title:"RandomUser.me / Vue.js / Axios",
+                    // people: [],
+                    // quantity: 6
+                // },
+                // methods: {
+                    // getPeople: function () {
+                        // var url = endpoint + this.quantity;
+                        // var request = new XMLHttpRequest();
+                        // request.open("GET", url);
+                        // request.responseType = 'json';
+                        // request.send();
+                        // request.onload = ()=> this.people = request.response.results;
+                    // }
+                // },
+                // created: function () {
+                    //this.getPeople();
+                // }
+            // });
+
+    const vm = Vue.createApp({
+        data(){
+            return {
+                selected: '',
+                profiles: [
+                    { first: 'Sonia', last: 'Bowman', photo: 'https://randomuser.me/api/portraits/women/8.jpg' }, 
+                    { first: 'Mario', last: 'Collins', photo: 'https://randomuser.me/api/portraits/men/61.jpg' }, 
+                    { first: 'Daniel', last: 'Ford', photo: 'https://randomuser.me/api/portraits/men/3.jpg' }, 
+                    { first: 'Naomi', last: 'Owens', photo: 'https://randomuser.me/api/portraits/women/69.jpg' }, 
+                    { first: 'Darell', last: 'Jones', photo: 'https://randomuser.me/api/portraits/men/24.jpg' }
+                ]
+            }
+        },
+        methods:{
+            profilePic(){
+                return this.profiles.photo;
+            }
+        }
+    }).mount('#app');
+
+    
+</script>
+
+<style>
+    html {
+        height:100%;
+        width:100%;
+    }
+    body {
+        height: 100%;
+        width: 100%;
+        margin: 0;
+        align-items: center;
+        background-image: url("./test-font-vue/assets/back-arrow.svg");
+        background-repeat: no-repeat;
+        background-position: right 0% bottom 50%;
+        background-size: 59%;
+    }
+
+    #app {
+        height: 100%;
+        width: 100%;
+        margin: auto;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center; 
+        margin: auto;
+    }
+    
+    .left-side {
+        margin: 100px;
+    }
+
+    .right-side {
+        margin: 100px;
+    }
+
+    .photo {
+        border-radius: 50%;
+        box-shadow: 15px 26px 30px #9e9e9e38;
+    }
+
+    .front-arrow {
+        position: absolute;
+        width: 540px;
+        height: 837px;
+        right: 0px;
+        top: 110px;
+
+    }
+
+    button {
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 1em;
+        text-transform: uppercase;
+        color: #fff;
+        background-color: #000;
+        border-radius: 30px;
+        padding: 10px 30px;
+        margin-top: 10px;
+        cursor: pointer;
+    }
+
+    h1 {
+        font-family: Times, 'Times New Roman', Georgia, serif;
+        font-size: 48px;
+    }
+
+</style>
+</html>
